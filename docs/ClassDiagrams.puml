@@ -1,0 +1,38 @@
+@startuml
+class TodoList extends Application{
+    + start(Scene scene);
+    + main();
+}
+
+class GuiController implements Initialization{
+    + getEvents(): Object[];
+    + initialize(URL arg0, ResourceBundle arg1
+    + comboChanged();
+    + saveFile(File);
+    + openFile(File);
+
+    - deleteSelectedEvent();
+    _ deleteAllEvents();
+    - editEvent();
+    - mark();
+    - displayCompletedTasks();
+    - displayNonCompletedTasks();
+    - addEventHandler();
+    - refresh();
+
+}
+
+class LocalEvent{
+    - date: LocalDate;
+    - description: String;
+    - completed: boolean;
+
+    + getDate(): date;
+    + setDate(LocalDate date);
+    + getDescription(): description;
+    + setDescription(String description);
+    + toString(): String;
+    + getCompleted(): boolean;
+    + setCompleted(boolean completed);
+}
+@enduml
