@@ -16,36 +16,44 @@ public class LocalEvent {
 
     // Getters and Setters for date, description, and completed.
     public LocalDate getDate() {
+
         return date;
     }
 
     public void setDate(LocalDate date) {
+
         this.date = date;
     }
 
     public String getDescription() {
+
         return description;
     }
 
     public void setDescription(String description) {
+
         this.description = description;
     }
 
     public boolean getCompleted(){
+
         return completed;
     }
 
     public void setCompleted() {
+
         this.completed= true;
     }
 
     // LocalEvent Constructor.
     public LocalEvent(LocalDate date, String description){
+
         this.setDate(date);
         this.setDescription(description);
     }
     // LocalEvent Constructor with boolean completed.
     public LocalEvent(LocalDate date, String description, boolean completed){
+
         this.setDate(date);
         this.setDescription(description);
         this.completed = completed;
@@ -53,5 +61,17 @@ public class LocalEvent {
 
     // Overriding toString method so Display message is in a format that makes sense.
     @Override
-    public String toString(){ return "At: " + this.getDate() + ": " + this.getDescription();}
+    public String toString(){
+        String output;
+
+        if (!completed ) {
+            output = "At: " + this.getDate() + ": " + this.getDescription() + "     Status: Incomplete";
+        }
+
+        else {
+            output = "At: " + this.getDate() + ": " + this.getDescription() + "     Status: Complete";
+        }
+
+        return output;
+    }
 }

@@ -153,6 +153,8 @@ public class GuiController implements Initializable {
 
             LocalDate localDate = LocalDate.parse(date,formatter);
             LocalEvent localEvent = new LocalEvent(localDate,description,getCompleted);
+            list.addAll(localEvent);
+            eventList.setItems(list);
         }
     }
 
@@ -177,8 +179,12 @@ public class GuiController implements Initializable {
 
     @FXML
     void mark() {
+
+        int selectedID = eventList.getSelectionModel().getSelectedIndex();
+        list.get(selectedID).setCompleted();
+        eventList.setItems(list);
+
         unsavedChanges = true;
-        // TODO: code for marking event completed.
     }
 
     @FXML
