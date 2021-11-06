@@ -31,16 +31,16 @@
                 <Font size="13.0" />
             </font>
         </Button>
-        <Button fx:id="markButton" layoutX="522.0" layoutY="7.0" mnemonicParsing="false" onAction="#mark" text="Mark">
+        <Button fx:id="markButton" layoutX="510.0" layoutY="7.0" mnemonicParsing="false" onAction="#markComplete" text="Mark Complete">
             <font>
                 <Font size="13.0" />
             </font>
         </Button>
-        <Button fx:id="displayMarkButton" layoutX="439.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayCompletedTasks" text="Disp Mark">
+        <Button fx:id="displayMarkButton" layoutX="284.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayCompletedTasks" text="Display Complete">
             <font>
                 <Font size="13.0" />
             </font></Button>
-        <Button fx:id="displayNoMarkButton" layoutX="353.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayNonCompletedTasks" text="Disp No M">
+        <Button fx:id="displayNoMarkButton" layoutX="185.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayNonCompletedTasks" text="Disp Incomp.">
             <font>
                 <Font size="13.0" />
             </font></Button>
@@ -49,11 +49,15 @@
                 <Font size="13.0" />
             </font></Button>
         <ComboBox fx:id="cbMenu" layoutX="8.0" layoutY="8.0" onAction="#comboChanged" prefHeight="25.0" prefWidth="73.0" promptText="File" />
-      <Button fx:id="displayAllButton" layoutX="269.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayAll" text="Display All">
+      <Button fx:id="displayAllButton" layoutX="102.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayAll" text="Display All">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
+      <Button fx:id="markIncomplete" layoutX="408.0" layoutY="7.0" mnemonicParsing="false" onAction="#markIncomplete" text="Mark Incomp.">
+         <font>
+            <Font size="13.0" />
+         </font></Button>
     </AnchorPane>
     <ListView fx:id="eventList" editable="true" prefHeight="200.0" prefWidth="200.0" />
 </SplitPane>

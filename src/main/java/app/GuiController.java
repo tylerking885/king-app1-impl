@@ -24,7 +24,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
 public class GuiController implements Initializable {
-    private boolean unsavedChanges = false;
 
     @FXML
     Button addButton;
@@ -40,6 +39,9 @@ public class GuiController implements Initializable {
 
     @FXML
     Button markButton;
+
+    @FXML
+    Button markIncomplete;
 
     @FXML
     Button displayMarkButton;
@@ -58,29 +60,26 @@ public class GuiController implements Initializable {
 
     @FXML
     ListView<LocalEvent> eventList;
-    ObservableList<LocalEvent> list = FXCollections.observableArrayList();
+    ObservableList<LocalEvent> listMaster = FXCollections.observableArrayList();
+    ObservableList<LocalEvent> listFiltered = FXCollections.observableArrayList();
 
     @FXML
     ComboBox<String> cbMenu;
-
     ObservableList<String> menuList = FXCollections.observableArrayList("Load", "Save");
-
     FileChooser fileChooser = new FileChooser();
 
     @FXML
     private void addEventHandler() {
 
-        list.add(new LocalEvent(datePicker.getValue(), descriptionTextField.getText()));
-        eventList.setItems(list);
+        listMaster.add(new LocalEvent(datePicker.getValue(), descriptionTextField.getText()));
+        eventList.setItems(listMaster);
         refresh();
-
-        unsavedChanges = true;
     }
 
     private void refresh(){
+
         datePicker.setValue(LocalDate.now());
         descriptionTextField.setText(null);
-
     }
 
     @Override
@@ -121,21 +120,21 @@ public class GuiController implements Initializable {
                 File file = fileChooser.showOpenDialog(stage);
                 fileChooser.setInitialDirectory(file.getParentFile());
                 openFile(file);
-            } catch (Exception ignored) {
-
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
+
     public void saveFile( File file) throws IOException {
 
         PrintWriter pw = new PrintWriter(file);
-        ObservableList<LocalEvent> list = eventList.getItems();
-        for (LocalEvent event: list){
+        for (LocalEvent event: listMaster){
             pw.write(event.getDescription());
             pw.write("\n");
             pw.write(event.getDate().toString());
             pw.write("\n");
-            pw.write(event.getCompleted()+ "");
+            pw.write(event.isCompleted()+ "");
             pw.write("\n");
         }
         pw.flush();
@@ -143,62 +142,100 @@ public class GuiController implements Initializable {
     }
 
     public void openFile(File file) throws FileNotFoundException {
+
         Scanner input = new Scanner(file);
+        listMaster.clear();
         while (input.hasNextLine()){
             String description = input.nextLine();
             String date = input.nextLine();
-            boolean getCompleted = input.nextBoolean();
+            String getCompleted = input.nextLine();
+            boolean completed = getCompleted.equalsIgnoreCase("true");
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
             LocalDate localDate = LocalDate.parse(date,formatter);
-            LocalEvent localEvent = new LocalEvent(localDate,description,getCompleted);
-            list.addAll(localEvent);
-            eventList.setItems(list);
+            LocalEvent localEvent = new LocalEvent(localDate,description,completed);
+
+            listMaster.add(localEvent);
+            System.out.println("List size: " + listMaster.size());
         }
+        System.out.println("List size: " + listMaster.size());
+        eventList.setItems(listMaster);
     }
 
     @FXML
     private void deleteSelectedEvent() {
+
         int selectedID = eventList.getSelectionModel().getSelectedIndex();
         eventList.getItems().remove(selectedID);
-        unsavedChanges = true;
+        listMaster.remove(selectedID);
     }
 
     @FXML
     private void deleteAllEvents() {
+
         eventList.getItems().clear();
-        unsavedChanges = true;
+        listMaster.clear();
+
     }
 
     @FXML
     private void editEvent() {
-        unsavedChanges = true;
+
         // TODO: code for editing event.
     }
 
     @FXML
-    void mark() {
+    void markComplete() {
 
         int selectedID = eventList.getSelectionModel().getSelectedIndex();
-        list.get(selectedID).setCompleted();
-        eventList.setItems(list);
+        System.out.print("Current State of list: " + listMaster.get(selectedID).toString());
+        listMaster.get(selectedID).setCompleted();
+        System.out.print("Current State of list: " + listMaster.get(selectedID).toString());
+        eventList.setItems(listMaster);
+        eventList.refresh();
+        System.out.print("Mark Completed");
+    }
 
-        unsavedChanges = true;
+    @FXML
+    void markIncomplete() {
+
+        int selectedID = eventList.getSelectionModel().getSelectedIndex();
+        listMaster.get(selectedID).setIncomplete();
+        eventList.setItems(listMaster);
+        eventList.refresh();
     }
 
     @FXML
     private void displayCompletedTasks(){
-        // TODO: Code for filtering a list down to just completed tasks.
+
+        listFiltered.clear();
+        for(LocalEvent event: listMaster){
+            if(event.isCompleted()){
+                listFiltered.add(event);
+            }
+        }
+        eventList.setItems(listFiltered);
     }
 
     @FXML
     private void displayNonCompletedTasks(){
-        // TODO: Code for filtering a list down to just non completed tasks.
+
+        listFiltered.clear();
+        for(LocalEvent event: listMaster){
+            if(!event.isCompleted()){
+                listFiltered.add(event);
+            }
+        }
+        eventList.setItems(listFiltered);
     }
 
     @FXML
     private void displayAll(){
-        // TODO: Code for repopulating a list with every entry.
+
+        listFiltered.clear();
+        listFiltered.addAll(listMaster);
+        eventList.setItems(listFiltered);
     }
 }
+
