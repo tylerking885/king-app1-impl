@@ -8,8 +8,12 @@ package app;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
+import javafx.stage.Window;
 
 public class GuiController implements Initializable {
     private boolean unsavedChanges = false;
@@ -65,51 +70,114 @@ public class GuiController implements Initializable {
     @FXML
     private void addEventHandler() {
 
-        // TODO: code that will an item to a list view object when the user chooses the add button.
+        list.add(new LocalEvent(datePicker.getValue(), descriptionTextField.getText()));
+        eventList.setItems(list);
+        refresh();
+
+        unsavedChanges = true;
     }
 
     private void refresh(){
-        // TODO: code that will refresh the datePicker control and textField box.
+        datePicker.setValue(LocalDate.now());
+        descriptionTextField.setText(null);
 
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-        // TODO: code that initializes the file chooser object and comboBox menu.
+        try {
+            fileChooser.setInitialDirectory(new File("C:\\users"));
+            cbMenu.setItems(menuList);
+        }catch(Exception e)  {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("TodoFX");
+            alert.setHeaderText("Events could not be loaded from file system");
+        }
     }
-    @FXML
-    private void comboChanged() {
 
-        // TODO: code that will open the file chooser based on if the user picked load or save.
+    public void comboChanged() {
+
+        int selectionIndex = cbMenu.getSelectionModel().getSelectedIndex();
+
+        if (selectionIndex == 1) {
+            Window stage = cbMenu.getScene().getWindow();
+            fileChooser.setTitle("Save Dialog");
+            fileChooser.setInitialFileName("mytodo");
+            fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("text file", "*.txt"));
+
+            try {
+                File file = fileChooser.showSaveDialog(stage);
+                fileChooser.setInitialDirectory(file.getParentFile());
+                saveFile(file);
+            } catch (Exception ignored) {
+
+            }
+        }
+        else if (selectionIndex == 0){
+            Window stage = cbMenu.getScene().getWindow();
+            fileChooser.setTitle("Load Dialog");
+
+            try {
+                File file = fileChooser.showOpenDialog(stage);
+                fileChooser.setInitialDirectory(file.getParentFile());
+                openFile(file);
+            } catch (Exception ignored) {
+
+            }
+        }
     }
-    public void saveFile(File file) throws IOException {
+    public void saveFile( File file) throws IOException {
 
-        // TODO: code for a helper method that saves the todo list to a txt file.
+        PrintWriter pw = new PrintWriter(file);
+        ObservableList<LocalEvent> list = eventList.getItems();
+        for (LocalEvent event: list){
+            pw.write(event.getDescription());
+            pw.write("\n");
+            pw.write(event.getDate().toString());
+            pw.write("\n");
+            pw.write(event.getCompleted()+ "");
+            pw.write("\n");
+        }
+        pw.flush();
+        pw.close();
     }
 
     public void openFile(File file) throws FileNotFoundException {
-        // TODO: code for a helper method that opens a file.
+        Scanner input = new Scanner(file);
+        while (input.hasNextLine()){
+            String description = input.nextLine();
+            String date = input.nextLine();
+            boolean getCompleted = input.nextBoolean();
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+            LocalDate localDate = LocalDate.parse(date,formatter);
+            LocalEvent localEvent = new LocalEvent(localDate,description,getCompleted);
+        }
     }
 
     @FXML
     private void deleteSelectedEvent() {
-        // TODO: code for deleting a particular event.
+        int selectedID = eventList.getSelectionModel().getSelectedIndex();
+        eventList.getItems().remove(selectedID);
+        unsavedChanges = true;
     }
 
     @FXML
     private void deleteAllEvents() {
-        // TODO: code for deleting every event.
+        eventList.getItems().clear();
+        unsavedChanges = true;
     }
 
     @FXML
     private void editEvent() {
-
+        unsavedChanges = true;
         // TODO: code for editing event.
     }
 
     @FXML
-    private void mark() {
-
+    void mark() {
+        unsavedChanges = true;
         // TODO: code for marking event completed.
     }
 
@@ -127,5 +195,4 @@ public class GuiController implements Initializable {
     private void displayAll(){
         // TODO: Code for repopulating a list with every entry.
     }
-
 }
