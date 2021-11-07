@@ -104,15 +104,15 @@ public class GuiController implements Initializable {
         if (selectionIndex == 1) {
             Window stage = cbMenu.getScene().getWindow();
             fileChooser.setTitle("Save Dialog");
-            fileChooser.setInitialFileName("mytodo");
+            fileChooser.setInitialFileName("myTodo");
             fileChooser.getExtensionFilters().addAll(new FileChooser.ExtensionFilter("text file", "*.txt"));
 
             try {
                 File file = fileChooser.showSaveDialog(stage);
                 fileChooser.setInitialDirectory(file.getParentFile());
                 saveFile(file);
-            } catch (Exception ignored) {
-
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
         else if (selectionIndex == 0){

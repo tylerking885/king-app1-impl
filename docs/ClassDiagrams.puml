@@ -1,15 +1,15 @@
 @startuml
 class TodoList extends Application{
-    + start(Scene);
+    + start(stage: Stage);
     + main();
 }
 
 class GuiController implements Initialize{
     + getEvents(): Object[];
-    + initialize(URL arg0, ResourceBundle arg1);
+    + initialize(arg0: URL, arg1: ResourceBundle);
     + comboChanged();
-    + saveFile(File);
-    + openFile(File);
+    + saveFile(file: File);
+    + openFile(file: File);
 
     - deleteSelectedEvent();
     - deleteAllEvents();
@@ -28,12 +28,14 @@ class LocalEvent{
     - description: String;
     - completed: boolean;
 
+    + LocalEvent(date: LocalDate, description: String);
+
     + getDate(): date;
-    + setDate(LocalDate date);
+    + setDate(date: LocalDate);
     + getDescription(): description;
-    + setDescription(String description);
+    + setDescription(description: String);
     + toString(): String;
     + getCompleted(): boolean;
-    + setCompleted(boolean completed);
+    + setCompleted(completed: boolean);
 }
 @enduml
