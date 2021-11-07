@@ -31,16 +31,16 @@
                 <Font size="13.0" />
             </font>
         </Button>
-        <Button fx:id="markButton" layoutX="510.0" layoutY="7.0" mnemonicParsing="false" onAction="#markComplete" text="Mark Complete">
+        <Button fx:id="markButton" layoutX="465.0" layoutY="7.0" mnemonicParsing="false" onAction="#markComplete" text="Mark Complete">
             <font>
                 <Font size="13.0" />
             </font>
         </Button>
-        <Button fx:id="displayMarkButton" layoutX="284.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayCompletedTasks" text="Display Complete">
+        <Button fx:id="displayMarkButton" layoutX="268.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayCompletedTasks" prefHeight="27.0" prefWidth="88.0" text="Disp Complete">
             <font>
                 <Font size="13.0" />
             </font></Button>
-        <Button fx:id="displayNoMarkButton" layoutX="185.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayNonCompletedTasks" text="Disp Incomp.">
+        <Button fx:id="displayNoMarkButton" layoutX="185.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayNonCompletedTasks" prefHeight="27.0" prefWidth="78.0" text="Disp Incomp.">
             <font>
                 <Font size="13.0" />
             </font></Button>
@@ -54,7 +54,7 @@
             <Font size="13.0" />
          </font>
       </Button>
-      <Button fx:id="markIncomplete" layoutX="408.0" layoutY="7.0" mnemonicParsing="false" onAction="#markIncomplete" text="Mark Incomp.">
+      <Button fx:id="markIncomplete" layoutX="363.0" layoutY="7.0" mnemonicParsing="false" onAction="#markIncomplete" text="Mark Incomp.">
          <font>
             <Font size="13.0" />
          </font></Button>

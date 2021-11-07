@@ -43,7 +43,7 @@ class LocalEventTest {
     @Test
     void testExceptionThrowOfOpenFile() {
         GuiController test1 = new GuiController();
-        FileNotFoundException thrown = Assertions.assertThrows(FileNotFoundException.class,() ->{
+        Assertions.assertThrows(FileNotFoundException.class, () -> {
             File file = new File("thisDoesNotExist");
             test1.openFile(file);
         });

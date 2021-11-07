@@ -14,14 +14,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldListCell;
+import javafx.scene.input.KeyCode;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import javafx.util.Callback;
+import javafx.util.StringConverter;
 
 public class GuiController implements Initializable {
 
@@ -157,9 +160,7 @@ public class GuiController implements Initializable {
             LocalEvent localEvent = new LocalEvent(localDate,description,completed);
 
             listMaster.add(localEvent);
-            System.out.println("List size: " + listMaster.size());
         }
-        System.out.println("List size: " + listMaster.size());
         eventList.setItems(listMaster);
     }
 
@@ -176,25 +177,67 @@ public class GuiController implements Initializable {
 
         eventList.getItems().clear();
         listMaster.clear();
-
     }
 
     @FXML
     private void editEvent() {
 
-        // TODO: code for editing event.
+        eventList.setEditable(true);
+        eventList.setCellFactory(new Callback<>() {
+
+            @Override
+            public ListCell<LocalEvent> call(ListView<LocalEvent> le) {
+                TextFieldListCell<LocalEvent> cell = new TextFieldListCell<>() {
+
+                    @Override
+                    public void updateItem(LocalEvent item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (empty || item == null) {
+                            setText(null);
+                            setGraphic(null);
+                        } else {
+                            setText(item.toString());
+                        }
+                    }
+
+
+                    @Override
+                    public void commitEdit(LocalEvent newValue) {
+                        super.commitEdit(newValue);
+                    }
+                };
+
+                cell.setOnKeyPressed(event -> {
+                    if (event.getCode() == KeyCode.ENTER)
+                        cell.commitEdit(le.getSelectionModel().getSelectedItem());
+                });
+
+                cell.setConverter(new StringConverter<>() {
+
+                    @Override
+                    public String toString(LocalEvent object) {
+                        return "";
+                    }
+
+                    @Override
+                    public LocalEvent fromString(String string) {
+                        return new LocalEvent(datePicker.getValue(), string, false);
+                    }
+                });
+                return cell;
+            }
+        });
+        eventList.setOnEditCommit(e -> eventList.getItems().set(e.getIndex(), e.getNewValue()));
     }
 
     @FXML
     void markComplete() {
 
         int selectedID = eventList.getSelectionModel().getSelectedIndex();
-        System.out.print("Current State of list: " + listMaster.get(selectedID).toString());
         listMaster.get(selectedID).setCompleted();
-        System.out.print("Current State of list: " + listMaster.get(selectedID).toString());
         eventList.setItems(listMaster);
         eventList.refresh();
-        System.out.print("Mark Completed");
     }
 
     @FXML
