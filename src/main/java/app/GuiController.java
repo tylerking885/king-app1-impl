@@ -72,7 +72,7 @@ public class GuiController implements Initializable {
     FileChooser fileChooser = new FileChooser();
 
     @FXML
-    private void addEventHandler() {
+    private void addEvent() {
 
         listMaster.add(new LocalEvent(datePicker.getValue(), descriptionTextField.getText()));
         eventList.setItems(listMaster);
@@ -229,10 +229,11 @@ public class GuiController implements Initializable {
             }
         });
         eventList.setOnEditCommit(e -> eventList.getItems().set(e.getIndex(), e.getNewValue()));
+        eventList.refresh();
     }
 
     @FXML
-    void markComplete() {
+    private void markComplete() {
 
         int selectedID = eventList.getSelectionModel().getSelectedIndex();
         listMaster.get(selectedID).setCompleted();
@@ -241,7 +242,7 @@ public class GuiController implements Initializable {
     }
 
     @FXML
-    void markIncomplete() {
+    private void markIncomplete() {
 
         int selectedID = eventList.getSelectionModel().getSelectedIndex();
         listMaster.get(selectedID).setIncomplete();
@@ -274,7 +275,7 @@ public class GuiController implements Initializable {
     }
 
     @FXML
-    private void displayAll(){
+    private void displayAllTasks(){
 
         listFiltered.clear();
         listFiltered.addAll(listMaster);

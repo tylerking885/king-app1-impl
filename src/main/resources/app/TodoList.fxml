@@ -11,7 +11,7 @@
 
 <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefWidth="694.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.GuiController">
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="85.0" prefWidth="692.0">
-        <Button fx:id="addButton" layoutX="579.0" layoutY="44.0" mnemonicParsing="false" onAction="#addEventHandler" text="Add">
+        <Button fx:id="addButton" layoutX="579.0" layoutY="44.0" mnemonicParsing="false" onAction="#addEvent" text="Add">
             <font>
                 <Font size="13.0" />
             </font>
@@ -31,16 +31,16 @@
                 <Font size="13.0" />
             </font>
         </Button>
-        <Button fx:id="markButton" layoutX="465.0" layoutY="7.0" mnemonicParsing="false" onAction="#markComplete" text="Mark Complete">
+        <Button fx:id="markButton" layoutX="463.0" layoutY="7.0" mnemonicParsing="false" onAction="#markComplete" text="Mark Complete">
             <font>
                 <Font size="13.0" />
             </font>
         </Button>
-        <Button fx:id="displayMarkButton" layoutX="268.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayCompletedTasks" prefHeight="27.0" prefWidth="88.0" text="Disp Complete">
+        <Button fx:id="displayMarkButton" layoutX="268.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayCompletedTasks" prefHeight="27.0" prefWidth="88.0" text="Display Complete">
             <font>
                 <Font size="13.0" />
             </font></Button>
-        <Button fx:id="displayNoMarkButton" layoutX="185.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayNonCompletedTasks" prefHeight="27.0" prefWidth="78.0" text="Disp Incomp.">
+        <Button fx:id="displayNoMarkButton" layoutX="185.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayNonCompletedTasks" prefHeight="27.0" prefWidth="78.0" text="Display Incomplete">
             <font>
                 <Font size="13.0" />
             </font></Button>
@@ -49,12 +49,12 @@
                 <Font size="13.0" />
             </font></Button>
         <ComboBox fx:id="cbMenu" layoutX="8.0" layoutY="8.0" onAction="#comboChanged" prefHeight="25.0" prefWidth="73.0" promptText="File" />
-      <Button fx:id="displayAllButton" layoutX="102.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayAll" text="Display All">
+      <Button fx:id="displayAllButton" layoutX="102.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayAllTasks" text="Display All">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Button fx:id="markIncomplete" layoutX="363.0" layoutY="7.0" mnemonicParsing="false" onAction="#markIncomplete" text="Mark Incomp.">
+      <Button fx:id="markIncomplete" layoutX="361.0" layoutY="7.0" mnemonicParsing="false" onAction="#markIncomplete" prefHeight="27.0" prefWidth="97.0" text="Mark Incomplete">
          <font>
             <Font size="13.0" />
          </font></Button>

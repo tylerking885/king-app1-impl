@@ -56,6 +56,7 @@ public class LocalEvent {
         this.setDate(date);
         this.setDescription(description);
     }
+
     // LocalEvent Constructor with boolean completed.
     public LocalEvent(LocalDate date, String description, boolean completed){
 
@@ -63,9 +64,7 @@ public class LocalEvent {
         this.setDescription(description);
         this.completed = completed;
     }
-    public LocalEvent(String description){
-        this.setDescription(description);
-    }
+
     // Overriding toString method so Display message is in a format that makes sense.
     @Override
     public String toString(){
