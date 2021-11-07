@@ -26,35 +26,35 @@
                 <Font size="13.0" />
             </font>
         </Button>
-        <Button fx:id="editButton" layoutX="576.0" layoutY="7.0" mnemonicParsing="false" onAction="#editEvent" text="Edit">
+        <Button fx:id="editButton" layoutX="563.0" layoutY="7.0" mnemonicParsing="false" onAction="#editEvent" text="Edit">
             <font>
                 <Font size="13.0" />
             </font>
         </Button>
-        <Button fx:id="markButton" layoutX="463.0" layoutY="7.0" mnemonicParsing="false" onAction="#markComplete" text="Mark Complete">
+        <Button fx:id="markButton" layoutX="452.0" layoutY="7.0" mnemonicParsing="false" onAction="#markComplete" text="Mark Complete">
             <font>
                 <Font size="13.0" />
             </font>
         </Button>
-        <Button fx:id="displayMarkButton" layoutX="268.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayCompletedTasks" prefHeight="27.0" prefWidth="88.0" text="Display Complete">
+        <Button fx:id="displayMarkButton" layoutX="259.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayCompletedTasks" prefHeight="27.0" prefWidth="88.0" text="Display Complete">
             <font>
                 <Font size="13.0" />
             </font></Button>
-        <Button fx:id="displayNoMarkButton" layoutX="185.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayNonCompletedTasks" prefHeight="27.0" prefWidth="78.0" text="Display Incomplete">
+        <Button fx:id="displayNoMarkButton" layoutX="167.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayNonCompletedTasks" prefHeight="27.0" prefWidth="88.0" text="Display Incomplete">
             <font>
                 <Font size="13.0" />
             </font></Button>
-        <Button fx:id="deleteAllButton" layoutX="623.0" layoutY="7.0" mnemonicParsing="false" onAction="#deleteAllEvents" prefHeight="27.0" prefWidth="62.0" text="Del. All">
+        <Button fx:id="deleteAllButton" layoutX="607.0" layoutY="7.0" mnemonicParsing="false" onAction="#deleteAllEvents" prefHeight="27.0" prefWidth="78.0" text="Delete All">
             <font>
                 <Font size="13.0" />
             </font></Button>
         <ComboBox fx:id="cbMenu" layoutX="8.0" layoutY="8.0" onAction="#comboChanged" prefHeight="25.0" prefWidth="73.0" promptText="File" />
-      <Button fx:id="displayAllButton" layoutX="102.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayAllTasks" text="Display All">
+      <Button fx:id="displayAllButton" layoutX="85.0" layoutY="7.0" mnemonicParsing="false" onAction="#displayAllTasks" text="Display All">
          <font>
             <Font size="13.0" />
          </font>
       </Button>
-      <Button fx:id="markIncomplete" layoutX="361.0" layoutY="7.0" mnemonicParsing="false" onAction="#markIncomplete" prefHeight="27.0" prefWidth="97.0" text="Mark Incomplete">
+      <Button fx:id="markIncomplete" layoutX="351.0" layoutY="7.0" mnemonicParsing="false" onAction="#markIncomplete" prefHeight="27.0" prefWidth="97.0" text="Mark Incomplete">
          <font>
             <Font size="13.0" />
          </font></Button>
