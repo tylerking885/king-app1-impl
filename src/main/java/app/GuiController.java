@@ -63,6 +63,7 @@ public class GuiController implements Initializable {
 
     @FXML
     ListView<LocalEvent> eventList;
+
     ObservableList<LocalEvent> listMaster = FXCollections.observableArrayList();
     ObservableList<LocalEvent> listFiltered = FXCollections.observableArrayList();
 
@@ -72,10 +73,10 @@ public class GuiController implements Initializable {
     FileChooser fileChooser = new FileChooser();
 
     private boolean validateFields() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+            if ((descriptionTextField.getText().isEmpty() || descriptionTextField.getText() == null || descriptionTextField == null) &&
+                    (datePicker.getEditor().getText() == null || datePicker.getEditor().getText().isEmpty() || datePicker == null)) {
 
-            if (descriptionTextField.getText().isEmpty() || descriptionTextField.getText() == null ||
-                    datePicker.getEditor().getText() == null || datePicker.getEditor().getText().isEmpty() || datePicker == null || descriptionTextField == null) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Validate Fields");
                 alert.setHeaderText(null);
                 alert.setContentText("A description must be entered and a date must be picked.");
@@ -84,15 +85,59 @@ public class GuiController implements Initializable {
                 return false;
             }
 
+            if (descriptionTextField.getText().isEmpty() || descriptionTextField.getText() == null || descriptionTextField == null) {
+
+                alert.setTitle("Validate Fields");
+                alert.setHeaderText(null);
+                alert.setContentText("A description must be entered.");
+                alert.showAndWait();
+
+                return false;
+            }
+
+            if (datePicker.getEditor().getText() == null || datePicker.getEditor().getText().isEmpty() || datePicker == null){
+
+                alert.setTitle("Validate Fields");
+                alert.setHeaderText(null);
+                alert.setContentText("A date must be picked.");
+                alert.showAndWait();
+
+                return false;
+            }
+
             return true;
     }
+
+    private boolean validateSelected() {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+
+        int selectedID = eventList.getSelectionModel().getSelectedIndex();
+        if (selectedID == -1) {
+
+            alert.setTitle("Validate Fields");
+            alert.setHeaderText(null);
+            alert.setContentText("A list item must be selected.");
+            alert.showAndWait();
+
+            return false;
+        }
+
+        return true;
+    }
+
 
     @FXML
     private void addEvent() {
         if(validateFields()) {
             listMaster.add(new LocalEvent(datePicker.getValue(), descriptionTextField.getText()));
             eventList.setItems(listMaster);
+            refresh();
         }
+    }
+    private void refresh(){
+
+        datePicker.setValue(LocalDate.now());
+        descriptionTextField.setText(null);
     }
 
     @Override
@@ -107,7 +152,7 @@ public class GuiController implements Initializable {
         }
     }
 
-    public void comboChanged() {
+    public void comboChanged() throws FileNotFoundException {
 
         int selectionIndex = cbMenu.getSelectionModel().getSelectedIndex();
 
@@ -128,14 +173,9 @@ public class GuiController implements Initializable {
         else if (selectionIndex == 0){
             Window stage = cbMenu.getScene().getWindow();
             fileChooser.setTitle("Load Dialog");
-
-            try {
-                File file = fileChooser.showOpenDialog(stage);
-                fileChooser.setInitialDirectory(file.getParentFile());
-                openFile(file);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            File file = fileChooser.showOpenDialog(stage);
+            fileChooser.setInitialDirectory(file.getParentFile());
+            openFile(file);
         }
     }
 
@@ -176,10 +216,12 @@ public class GuiController implements Initializable {
 
     @FXML
     private void deleteSelectedEvent() {
+        if(validateSelected()) {
 
-        int selectedID = eventList.getSelectionModel().getSelectedIndex();
-        eventList.getItems().remove(selectedID);
-        listMaster.remove(selectedID);
+            int selectedID = eventList.getSelectionModel().getSelectedIndex();
+            eventList.getItems().remove(selectedID);
+            listMaster.remove(selectedID);
+        }
     }
 
     @FXML
@@ -244,20 +286,24 @@ public class GuiController implements Initializable {
 
     @FXML
     private void markComplete() {
+        if(validateSelected()) {
 
-        int selectedID = eventList.getSelectionModel().getSelectedIndex();
-        listMaster.get(selectedID).setCompleted();
-        eventList.setItems(listMaster);
-        eventList.refresh();
+            int selectedID = eventList.getSelectionModel().getSelectedIndex();
+            listMaster.get(selectedID).setCompleted();
+            eventList.setItems(listMaster);
+            eventList.refresh();
+        }
     }
 
     @FXML
     private void markIncomplete() {
+        if(validateSelected()) {
 
-        int selectedID = eventList.getSelectionModel().getSelectedIndex();
-        listMaster.get(selectedID).setIncomplete();
-        eventList.setItems(listMaster);
-        eventList.refresh();
+            int selectedID = eventList.getSelectionModel().getSelectedIndex();
+            listMaster.get(selectedID).setIncomplete();
+            eventList.setItems(listMaster);
+            eventList.refresh();
+        }
     }
 
     @FXML
