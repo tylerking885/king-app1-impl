@@ -71,18 +71,28 @@ public class GuiController implements Initializable {
     ObservableList<String> menuList = FXCollections.observableArrayList("Load", "Save");
     FileChooser fileChooser = new FileChooser();
 
-    @FXML
-    private void addEvent() {
+    private boolean validateFields() {
 
-        listMaster.add(new LocalEvent(datePicker.getValue(), descriptionTextField.getText()));
-        eventList.setItems(listMaster);
-        refresh();
+            if (descriptionTextField.getText().isEmpty() || descriptionTextField.getText() == null ||
+                    datePicker.getEditor().getText() == null || datePicker.getEditor().getText().isEmpty() || datePicker == null || descriptionTextField == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Validate Fields");
+                alert.setHeaderText(null);
+                alert.setContentText("A description must be entered and a date must be picked.");
+                alert.showAndWait();
+
+                return false;
+            }
+
+            return true;
     }
 
-    private void refresh(){
-
-        datePicker.setValue(LocalDate.now());
-        descriptionTextField.setText(null);
+    @FXML
+    private void addEvent() {
+        if(validateFields()) {
+            listMaster.add(new LocalEvent(datePicker.getValue(), descriptionTextField.getText()));
+            eventList.setItems(listMaster);
+        }
     }
 
     @Override
