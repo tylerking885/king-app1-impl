@@ -60,6 +60,7 @@
                     <MenuItem mnemonicParsing="false" onAction="#displayCompletedTasks" text="Display Complete" />
                     <MenuItem mnemonicParsing="false" onAction="#displayNonCompletedTasks" text="Display Incomplete" />
                     <MenuItem mnemonicParsing="false" onAction="#displayAllTasks" text="Display All" />
+               <MenuItem mnemonicParsing="false" onAction="#sortTasksByDate" text="Sort (Date)" />
                 </items>
                 <font>
                     <Font size="13.0" />

@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Scanner;
@@ -486,6 +487,27 @@ public class GuiController implements Initializable {
 
         descriptionTextField.setStyle("-fx-border-color: blue;" + "-fx-background-color: #1b1b1c;" + "-fx-border-insets: 0, 0, 0, 0;" +
                 "-fx-border-radius: 3 3 3 3, 3 3 3 3, 3 3 3 3, 3 3 3 3;" + "-fx-text-fill: white;");
+    }
+
+    @FXML
+    public void sortTasksByDate() {
+
+        // Check if the master list isn't empty
+        if (!listMaster.isEmpty()) {
+
+            // if not empty then Create a Comparator variable of type LocalEvent
+            // and set it to the comparison of all the dates.
+            Comparator<LocalEvent> comparator = Comparator.comparing(LocalEvent::getDate);
+
+            // Sort the master list with comparator variable.
+            listMaster.sort(comparator);
+
+            // Set the sorted list.
+            eventList.setItems(listMaster);
+
+            // Now since we affected the master list there are unsaved changes.
+            unsavedChanges = true;
+        }
     }
 }
 

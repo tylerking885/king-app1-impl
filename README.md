@@ -18,6 +18,7 @@ Welcome to the Todo List program!
 - [Display Complete](#display-complete)
 - [Display Incomplete](#display-incomplete)
 - [Display All](#display-all)
+- [Sort (Date)](#sort-date)
 - [Save](#save)
 - [Load](#load)
 - [Author Info](#author-info)
@@ -217,6 +218,26 @@ In order to use Display Incomplete 1 pre-Condition must be met.
 > The list will now return to its original state.
 >
 > ![Project Image](src/main/resources/readmeImages/After-DisplayAll-Pressed.png)
+
+
+[Back To The Top](#table-of-contents)
+
+---
+
+## Sort (Date)
+
+In order to use Sort Date Incomplete 1 pre-Condition must be met.
+> 1) There must be an existing entries in the list with different dates.
+
+> Sort (Date) process on an occupied list (Before pressing Sort (Date) from the Options menu):
+>
+> ![Project Image](src/main/resources/readmeImages/Before-Sorted-Pressed.png)
+>
+> After pressing Sort (Date):
+>
+> The list will appear sorted by date in ascending order.
+>
+> ![Project Image](src/main/resources/readmeImages/After-Sorted-Pressed.png)
 
 
 [Back To The Top](#table-of-contents)
