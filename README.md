@@ -18,8 +18,6 @@ Delete Button)
 
 	This button deletes an item from the list at a specific index. 
 
-	NOTE: If the user clicks this button without selecting an item from the list an IndexOutOfBoundsException error is thrown and caught.
-      	      This error is thrown also if delete button is pressed with no items in the list.
 
 Delete All Button)
 
@@ -43,15 +41,11 @@ Mark Complete Button)
 
 	Pressing this button will change the status of an item in the list from Incomplete to Complete.
 
-	NOTE: If the user presses this with no items in the list (an empty list) then an IndexOutOfBoundsException is thrown and caught.
-	      IndexOutOfBoundsException is also thrown and caught if this button is pressed with no items from the list selected.
 
 Mark Incomplete Button)
 
 	Pressing this button will change the status of an item in the list from Complete to Incomplete.
 
-	NOTE: If the user presses this with no items in the list (an empty list) then an IndexOutOfBoundsException is thrown and caught.
-	      IndexOutOfBoundsException is also thrown and caught if this button is pressed with no items from the list selected.
 
 Display Complete Button) 
 	
