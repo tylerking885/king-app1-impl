@@ -275,6 +275,7 @@ public class GuiController implements Initializable {
             listMaster.get(selectedID).setCompleted();
             eventList.setItems(listMaster);
             eventList.refresh();
+            unsavedChanges = true;
         }
     }
     // Opposite of markComplete.
@@ -286,6 +287,7 @@ public class GuiController implements Initializable {
             listMaster.get(selectedID).setIncomplete();
             eventList.setItems(listMaster);
             eventList.refresh();
+            unsavedChanges = true;
         }
     }
 
@@ -433,7 +435,6 @@ public class GuiController implements Initializable {
                 String description = descriptionTextField.getText().trim();
                 LocalDate date = datePicker.getValue();
 
-
                 // If the text fields are valid and dupCheck passes
                 if (validateFields(validateTitle)) {
 
@@ -465,8 +466,7 @@ public class GuiController implements Initializable {
                 descriptionTextField.setText(String.valueOf(localEventEdit.getDescription()));
                 descriptionTextField.setStyle("-fx-border-color: blue;"+"-fx-background-color: #1b1b1c;"+"-fx-border-insets: 0, 0, 0, 0;"+
                         "-fx-border-radius: 3 3 3 3, 3 3 3 3, 3 3 3 3, 3 3 3 3;"+"-fx-text-fill: white;");
-
-
+                datePicker.setValue(localEventEdit.getDate());
                 // Change edit boolean to true
                 editModeToggle = true;
 
