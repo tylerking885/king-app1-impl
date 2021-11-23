@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane dividerPositions="0.5" maxWidth="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="293.0" prefWidth="1149.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.GuiController">
+    <AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleClickAnchorPaneAction" onMouseDragged="#handleMovementAction" prefHeight="85.0" prefWidth="1149.0" style="-fx-background-color: black;">
+        <MenuButton fx:id="fileMenuButton" alignment="TOP_LEFT" layoutX="16.0" layoutY="4.0" maxHeight="-Infinity" minHeight="-Infinity" mnemonicParsing="false" prefHeight="26.0" prefWidth="58.0" style="-fx-border-color: white; -fx-background-color: #1b1b1c;" text="File" textFill="WHITE">
+            <items>
+                <MenuItem mnemonicParsing="false" onAction="#menuLoadPicked" text="Load" />
+                <MenuItem mnemonicParsing="false" onAction="#menuSavePicked" text="Save" />
+            </items>
+            <font>
+                <Font size="13.0" />
+            </font>
+        </MenuButton>
+        <Button fx:id="buttonMin" alignment="CENTER" layoutX="1073.0" layoutY="-12.0" maxWidth="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleMinAction" onMouseEntered="#hoverOnMinBt" onMouseExited="#hoverOffMinBt" prefHeight="53.0" prefWidth="35.0" style="-fx-background-color: black; -fx-border-color: black;" text="-" textFill="WHITE">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
+        <Button fx:id="buttonClose" alignment="CENTER" layoutX="1106.0" layoutY="-9.0" mnemonicParsing="false" onAction="#handleCloseAction" onMouseEntered="#hoverOnCloseBt" onMouseExited="#hoverOffCloseBt" prefHeight="48.0" prefWidth="44.0" style="-fx-background-color: black; -fx-border-color: black;" text="X" textFill="WHITE" />
+        <Label layoutX="87.0" layoutY="8.0" text="InventoryManagement.exe" textFill="WHITE" />
+        <AnchorPane layoutX="-10.0" layoutY="35.0" prefHeight="53.0" prefWidth="1160.0" style="-fx-background-color: #1b1b1c;">
+            <Button fx:id="addButton" alignment="CENTER" layoutX="870.0" layoutY="11.0" mnemonicParsing="false" onAction="#addEvent" style="-fx-border-color: white; -fx-background-color: #1b1b1c;" text="Add" textFill="WHITE">
+                <font>
+                    <Font size="13.0" />
+                </font>
+            </Button>
+            <Button fx:id="deleteButton" alignment="CENTER" layoutX="986.0" layoutY="11.0" mnemonicParsing="false" onAction="#deleteSelectedEvent" style="-fx-border-color: white; -fx-background-color: #1b1b1c;" text="Delete" textFill="WHITE">
+                <font>
+                    <Font size="13.0" />
+                </font>
+            </Button>
+            <Button fx:id="editButton" alignment="CENTER" layoutX="929.0" layoutY="11.0" mnemonicParsing="false" onAction="#editEntry" style="-fx-border-color: white; -fx-background-color: #1b1b1c;" text="Edit" textFill="WHITE">
+                <font>
+                    <Font size="13.0" />
+                </font>
+            </Button>
+            <TextField fx:id="descriptionTextField" alignment="CENTER" layoutX="26.0" layoutY="11.0" onMouseClicked="#handleClickTextField" prefHeight="29.0" prefWidth="641.0" promptText="Enter Description here..." style="-fx-background-color: #1b1b1c; -fx-background-insets: 0 0 0 0; -fx-border-color: white; -fx-text-fill: white;" styleClass="text-field">
+                <font>
+                    <Font name="System Bold Italic" size="13.0" />
+                </font>
+                <effect>
+                    <Glow />
+                </effect>
+            </TextField>
+            <MenuButton alignment="TOP_RIGHT" layoutX="1058.0" layoutY="11.0" mnemonicParsing="false" popupSide="RIGHT" style="-fx-border-color: white; -fx-background-color: #1b1b1c; -fx-background-insets-color: #1b1b1c; -fx-background-insets-text-color: white;" text="Options" textFill="WHITE">
+                <items>
+                    <MenuItem mnemonicParsing="false" onAction="#deleteAllEvents" text="Delete All" />
+                    <MenuItem mnemonicParsing="false" onAction="#displayCompletedTasks" text="Display Complete" />
+                    <MenuItem mnemonicParsing="false" onAction="#displayNonCompletedTasks" text="Display Incomplete" />
+                    <MenuItem mnemonicParsing="false" onAction="#displayAllTasks" text="Display All" />
+                    <MenuItem mnemonicParsing="false" onAction="#markComplete" text="Mark (Complete)" />
+                    <MenuItem mnemonicParsing="false" onAction="#markIncomplete" text="Mark (Incomplete)" />
+                </items>
+                <font>
+                    <Font size="13.0" />
+                </font>
+            </MenuButton>
+         <DatePicker fx:id="datePicker" layoutX="679.0" layoutY="11.0" prefHeight="29.0" prefWidth="180.0" />
+        </AnchorPane>
+    </AnchorPane>
+   <ListView fx:id="eventList" prefHeight="200.0" prefWidth="200.0" />
+</SplitPane>

@@ -1,0 +1,89 @@
+.root{
+    -fx-selection-bar-text: red;
+}
+
+.ListView{
+
+    -fx-font-size: 13;
+    -fx-font-family: "Lucida Console";
+    -fx-text-color: "white";
+    -fx-alignment: center;
+    -fx-selection-bar:white;
+    -fx-selection-bar-text: red;
+}
+
+.list-view:focused .list-cell:filled:focused:selected {
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-selection-bar;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background: -fx-accent;
+    -fx-text-fill: red;
+    -fx-selection-bar-non-focused: white;
+}
+
+.list-view:non-focused .list-cell:filled:non-focused:selected {
+    -fx-background-color: -fx-focus-color, -fx-cell-focus-inner-border, -fx-selection-bar;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background: -fx-accent;
+    -fx-text-fill: red;
+    -fx-selection-bar-non-focused: white;
+}
+
+.list-view .list-cell:even {
+    -fx-background-color: #222224;
+    -fx-font-size: 13;
+    -fx-font-family: "Lucida Console";
+    -fx-text-fill: "white";
+    -fx-alignment: center;
+    -fx-selection-bar:white;
+    -fx-selection-bar-non-focused: white;
+    -fx-selection-bar-non-focused-text: red;
+    -fx-selection-bar-text: red;
+}
+
+.list-view .list-cell:odd {
+    -fx-background-color: #222224;
+    -fx-font-size: 13;
+    -fx-font-family: "Lucida Console";
+    -fx-text-fill: "white";
+    -fx-alignment: center;
+    -fx-selection-bar:white;
+    -fx-selection-bar-non-focused: white ;
+    -fx-selection-bar-non-focused-text: red;
+    -fx-selection-bar-text: red;
+}
+
+#eventList{
+    -fx-background-color: #222224;
+    -fx-font-size: 14;
+    -fx-font-family: "Lucida Console";
+    -fx-text-color: "white";
+    -fx-alignment: center;
+}
+
+.menu-item .label {
+    -fx-text-fill: white;
+}
+
+.menu-item:focused {
+     -fx-background-color: grey;
+}
+
+.menu-item:focused .label {
+    -fx-text-fill: blue;
+}
+
+.context-menu {
+    -fx-background-color: black;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 0 6 6 6, 0 5 5 5, 0 4 4 4;
+    -fx-padding: 0.333333em 0.083333em 0.666667em 0.083333em;
+}
+.text-field:unfocused{
+
+}
+.text-field:focused{
+    -fx-border-color: blue;
+    -fx-border-insets: 0, 0, 0, 0;
+    -fx-border-radius: 3 3 3 3, 3 3 3 3, 3 3 3 3, 3 3 3 3;
+}
+
